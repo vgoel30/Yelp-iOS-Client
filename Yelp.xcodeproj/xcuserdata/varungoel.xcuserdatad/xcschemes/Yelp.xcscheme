@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "2FC65B8C1C698F150015E20E"
+               BlueprintIdentifier = "222D8A5419CCF9F900D2DB53"
                BuildableName = "Yelp.app"
                BlueprintName = "Yelp"
                ReferencedContainer = "container:Yelp.xcodeproj">
@@ -28,11 +28,21 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "222D8A6919CCF9F900D2DB53"
+               BuildableName = "YelpTests.xctest"
+               BlueprintName = "YelpTests"
+               ReferencedContainer = "container:Yelp.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "2FC65B8C1C698F150015E20E"
+            BlueprintIdentifier = "222D8A5419CCF9F900D2DB53"
             BuildableName = "Yelp.app"
             BlueprintName = "Yelp"
             ReferencedContainer = "container:Yelp.xcodeproj">
@@ -55,7 +65,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "2FC65B8C1C698F150015E20E"
+            BlueprintIdentifier = "222D8A5419CCF9F900D2DB53"
             BuildableName = "Yelp.app"
             BlueprintName = "Yelp"
             ReferencedContainer = "container:Yelp.xcodeproj">
@@ -74,7 +84,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "2FC65B8C1C698F150015E20E"
+            BlueprintIdentifier = "222D8A5419CCF9F900D2DB53"
             BuildableName = "Yelp.app"
             BlueprintName = "Yelp"
             ReferencedContainer = "container:Yelp.xcodeproj">
