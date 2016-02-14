@@ -10,31 +10,33 @@ import UIKit
 
 
 
-class BusinessesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, FiltersViewControllerDelegate, UISearchBarDelegate,  UIScrollViewDelegate {
+class BusinessesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, FiltersViewControllerDelegate, UISearchBarDelegate,  UIScrollViewDelegate, UISearchControllerDelegate {
+    //adding the search controller
+    let searchController = UISearchController(searchResultsController: nil)
     
+    //the names of the restaurants that match the search string
+    var filteredNames = [String]()
     
     
     @IBOutlet weak var tableView: UITableView!
     var businesses: [Business]!
     
   
-    
-    
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        searchController.searchBar.sizeToFit()
+        navigationItem.titleView = searchController.searchBar
+        searchController.hidesNavigationBarDuringPresentation = false
+        searchController.dimsBackgroundDuringPresentation = false
+        
         navigationController!.navigationBar.barTintColor = UIColor.redColor()
         
-       
-        
-        
+    
         tableView.dataSource = self
         tableView.delegate = self
+        searchController.delegate = self
       
-        
-        
         
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 120
