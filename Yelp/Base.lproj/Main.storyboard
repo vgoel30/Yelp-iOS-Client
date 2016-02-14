@@ -5,7 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
     </dependencies>
     <scenes>
-        <!--Yelp-->
+        <!--Businesses View Controller-->
         <scene sceneID="5L9-Uz-lNK">
             <objects>
                 <viewController id="2xI-yr-O5N" customClass="BusinessesViewController" customModule="Yelp" customModuleProvider="target" sceneMemberID="viewController">
@@ -86,11 +86,11 @@
                                                 <constraint firstAttribute="trailing" secondItem="3qC-CI-qqi" secondAttribute="trailing" constant="8" id="4OJ-NX-qwq"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="G5P-Aa-deb" secondAttribute="trailing" constant="8" id="8Re-qE-zN9"/>
                                                 <constraint firstItem="J7Z-W6-TbI" firstAttribute="top" secondItem="pgB-fA-fbY" secondAttribute="top" constant="8" id="9Rc-n8-KEf"/>
-                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="PGi-kD-Jzt" secondAttribute="bottom" constant="12" id="C08-eG-G0A"/>
+                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="PGi-kD-Jzt" secondAttribute="bottom" constant="8" id="C08-eG-G0A"/>
                                                 <constraint firstItem="J7Z-W6-TbI" firstAttribute="leading" secondItem="PGi-kD-Jzt" secondAttribute="trailing" constant="8" id="De4-Bl-tlX"/>
                                                 <constraint firstItem="3qC-CI-qqi" firstAttribute="top" secondItem="pgB-fA-fbY" secondAttribute="top" constant="8" id="EdJ-Lm-ztA"/>
                                                 <constraint firstItem="ozN-sX-10j" firstAttribute="top" secondItem="J7Z-W6-TbI" secondAttribute="bottom" constant="8" id="Gzv-JZ-IdZ"/>
-                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="I6O-va-UBI" secondAttribute="bottom" constant="12" id="Hbn-Iw-axs"/>
+                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="I6O-va-UBI" secondAttribute="bottom" constant="4" id="Hbn-Iw-axs"/>
                                                 <constraint firstItem="G5P-Aa-deb" firstAttribute="top" secondItem="ozN-sX-10j" secondAttribute="bottom" constant="7" id="NcB-Xx-SRp"/>
                                                 <constraint firstItem="G5P-Aa-deb" firstAttribute="leading" secondItem="PGi-kD-Jzt" secondAttribute="trailing" constant="8" id="cN4-R3-3sI"/>
                                                 <constraint firstItem="I6O-va-UBI" firstAttribute="top" secondItem="G5P-Aa-deb" secondAttribute="bottom" constant="8" id="rD2-9J-zZp"/>
@@ -123,8 +123,8 @@
                             <constraint firstItem="wWL-bX-j0c" firstAttribute="top" secondItem="XhR-oz-92f" secondAttribute="top" id="fys-gD-q1C"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Yelp" id="gwy-hD-dDB">
-                        <barButtonItem key="leftBarButtonItem" title="Filters" id="Xwk-Ak-wVg">
+                    <navigationItem key="navigationItem" id="gwy-hD-dDB">
+                        <barButtonItem key="leftBarButtonItem" title="Filter" id="Xwk-Ak-wVg">
                             <connections>
                                 <segue destination="4bO-T4-Xbr" kind="modal" id="9j6-py-5rP"/>
                             </connections>
@@ -139,7 +139,7 @@
             </objects>
             <point key="canvasLocation" x="1275" y="355"/>
         </scene>
-        <!--Filters-->
+        <!--Filters View Controller-->
         <scene sceneID="1Qt-NT-lUV">
             <objects>
                 <viewController id="OhG-89-vid" customClass="FiltersViewController" customModule="Yelp" customModuleProvider="target" sceneMemberID="viewController">
@@ -194,7 +194,7 @@
                             <constraint firstItem="aUv-N9-1aV" firstAttribute="leading" secondItem="ERE-ga-PIe" secondAttribute="leading" id="trD-45-7R6"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Filters" id="3Qm-4p-TmK">
+                    <navigationItem key="navigationItem" id="3Qm-4p-TmK">
                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="C6E-s4-VGx">
                             <connections>
                                 <action selector="onCancelButton:" destination="OhG-89-vid" id="wuc-99-hHR"/>
@@ -251,4 +251,5 @@
             <point key="canvasLocation" x="1608" y="355"/>
         </scene>
     </scenes>
+    <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
 </document>

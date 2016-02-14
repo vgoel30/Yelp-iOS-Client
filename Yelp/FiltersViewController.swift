@@ -25,6 +25,7 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController!.navigationBar.barTintColor = UIColor.redColor()
         
         categories = yelpCategories()
         

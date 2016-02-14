@@ -9,39 +9,46 @@
 import UIKit
 
 
-class BusinessesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, FiltersViewControllerDelegate {
+
+class BusinessesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, FiltersViewControllerDelegate, UISearchBarDelegate,  UIScrollViewDelegate {
+    
     
     
     @IBOutlet weak var tableView: UITableView!
-    
-    
     var businesses: [Business]!
     
-    //adding the search controller
-    let searchController = UISearchController(searchResultsController: nil)
+  
+    
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationController!.navigationBar.barTintColor = UIColor.redColor()
+        
+       
+        
         
         tableView.dataSource = self
         tableView.delegate = self
+      
+        
+        
+        
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 120
         
-        searchController.searchBar.sizeToFit()
-        navigationItem.titleView = searchController.searchBar
-        //To prevent the hiding of the navigation bar
-        searchController.hidesNavigationBarDuringPresentation = false
         
-        Business.searchWithTerm("Thai", completion: { (businesses: [Business]!, error: NSError!) -> Void in
+        Business.searchWithTerm("Indian", completion: { (businesses: [Business]!, error: NSError!) -> Void in
             self.businesses = businesses
             self.tableView.reloadData()
             for business in businesses {
-                print(business.name!)
-                print(business.address!)
+                //append the name to the list of restaurant names
+                //self.restaurantNames.append(business.name!)
+                print(business)
             }
-            print(businesses.count)
+            
         })
         
         /* Example of Yelp search with more search options specified
@@ -56,12 +63,19 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
         */
     }
     
+    
+    
+    
+    
+
+    
     //the number of rows
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        if businesses != nil{
+       
+        if let businesses = businesses {
             return businesses.count
         }
+            //don't create the table if no data was fetched
         else{
             return 0
         }
@@ -72,11 +86,13 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
         
         let cell = tableView.dequeueReusableCellWithIdentifier("BusinessCell",forIndexPath: indexPath) as! BusinessCell
         
-        cell.business = businesses[indexPath.row]
-        
+            cell.business = businesses[indexPath.row]
+       
         return cell
         
     }
+    
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
