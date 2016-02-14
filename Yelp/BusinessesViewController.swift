@@ -38,6 +38,9 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
     //all the restaurant names
     var restaurantNames = [String]()
     
+    //the array of businesses to show when searching
+    var businessesToShow = [Business]()
+    
     
     @IBOutlet weak var tableView: UITableView!
     var businesses: [Business]!
@@ -62,7 +65,6 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
     
         
       
-        
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 120
         
@@ -93,9 +95,6 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
     
     
     
-    
-
-    
     //the number of rows
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
        
@@ -120,7 +119,25 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
         
         let cell = tableView.dequeueReusableCellWithIdentifier("BusinessCell",forIndexPath: indexPath) as! BusinessCell
         
+        //if search is active
+        if(searchController.active && searchController.searchBar.text != ""){
+            businessesToShow.removeAll()
+            
+            //iterate over the businesses to get the businesses that we want to display
+            
+            for(var i = 0;  i < businesses.count; i++){
+                let name = businesses[i].name!
+                
+                if(filteredNames.contains(name)){
+                    businessesToShow.append(businesses[i])
+                }
+            }
+            cell.business = businessesToShow[indexPath.row]
+        }
+        
+        else{
             cell.business = businesses[indexPath.row]
+        }
             return cell
         
     }
