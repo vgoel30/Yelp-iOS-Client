@@ -8,34 +8,59 @@
 
 import UIKit
 
+extension BusinessesViewController: UISearchResultsUpdating {
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
+        filterContentForSearchText(searchController.searchBar.text!)
+    }
+}
 
 
-class BusinessesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, FiltersViewControllerDelegate, UISearchBarDelegate,  UIScrollViewDelegate, UISearchControllerDelegate {
+class BusinessesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, FiltersViewControllerDelegate,  UIScrollViewDelegate{
+    
+    //function to filter name
+    func filterContentForSearchText(searchText: String, scope: String = "All") {
+       filteredNames = restaurantNames.filter({ (text) -> Bool in
+            let tmp: NSString = text
+            let range = tmp.rangeOfString(searchText, options: NSStringCompareOptions.CaseInsensitiveSearch)
+            return range.location != NSNotFound
+        })
+        
+        tableView.reloadData()
+    }
+    
     //adding the search controller
     let searchController = UISearchController(searchResultsController: nil)
+
     
     //the names of the restaurants that match the search string
     var filteredNames = [String]()
+    
+    //all the restaurant names
+    var restaurantNames = [String]()
     
     
     @IBOutlet weak var tableView: UITableView!
     var businesses: [Business]!
     
+   
   
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //setting up the search bar
         searchController.searchBar.sizeToFit()
         navigationItem.titleView = searchController.searchBar
         searchController.hidesNavigationBarDuringPresentation = false
         searchController.dimsBackgroundDuringPresentation = false
+        searchController.searchResultsUpdater = self
         
         navigationController!.navigationBar.barTintColor = UIColor.redColor()
         
     
         tableView.dataSource = self
         tableView.delegate = self
-        searchController.delegate = self
+    
+        
       
         
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -47,10 +72,10 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
             self.tableView.reloadData()
             for business in businesses {
                 //append the name to the list of restaurant names
-                //self.restaurantNames.append(business.name!)
-                print(business)
+                self.restaurantNames.append(business.name!)
+                //print(business)
             }
-            
+            print(self.restaurantNames)
         })
         
         /* Example of Yelp search with more search options specified
@@ -74,12 +99,19 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
     //the number of rows
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
        
-        if let businesses = businesses {
-            return businesses.count
+       
+        if searchController.active && searchController.searchBar.text != "" {
+            return filteredNames.count
         }
-            //don't create the table if no data was fetched
+        
         else{
-            return 0
+            if let businesses = businesses {
+                return businesses.count
+            }
+                //don't create the table if no data was fetched
+            else{
+                return 0
+            }
         }
     }
     
@@ -89,8 +121,7 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
         let cell = tableView.dequeueReusableCellWithIdentifier("BusinessCell",forIndexPath: indexPath) as! BusinessCell
         
             cell.business = businesses[indexPath.row]
-       
-        return cell
+            return cell
         
     }
     
