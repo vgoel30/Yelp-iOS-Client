@@ -19,7 +19,7 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
     
     func loadMoreData() {
         
-        Business.searchWithTerm("Thai", offset: businesses!.count/20, completion: { (businesses: [Business]!, error: NSError!) -> Void in
+        Business.searchWithTerm("Indian", offset: businesses!.count, completion: { (businesses: [Business]!, error: NSError!) -> Void in
             self.businesses! += businesses
             self.tableView.reloadData()
             for business in businesses {
@@ -104,15 +104,15 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
         
         
         
-        Business.searchWithTerm("Thai", offset: 0, completion: { (businesses: [Business]!, error: NSError!) -> Void in
+        Business.searchWithTerm("Indian", offset: 0, completion: { (businesses: [Business]!, error: NSError!) -> Void in
             self.businesses = businesses
             self.tableView.reloadData()
             for business in businesses {
                 //append the name to the list of restaurant names
                 self.restaurantNames.append(business.name!)
-                //print(business)
+                print(business.latitude)
             }
-            print(self.restaurantNames)
+            //print(self.restaurantNames)
         })
         
         /* Example of Yelp search with more search options specified
@@ -178,13 +178,28 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
+    /*
+    // MARK: - Navigation
+    
+    // In a storyboard-based application, you will often want to do a little preparation before navigation*/
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let cell = sender as! UITableViewCell
+        
+        let indexPath = self.tableView.indexPathForCell(cell)
+        print(indexPath!.row)
+        
+        let businessClicked = self.businesses[indexPath!.row]
+        
+        let mapsViewController = segue.destinationViewController as! MapsViewController
+        
+        mapsViewController.latitude = businessClicked.latitude
+        mapsViewController.longitude = businessClicked.longitude
+    }
     
     
 }

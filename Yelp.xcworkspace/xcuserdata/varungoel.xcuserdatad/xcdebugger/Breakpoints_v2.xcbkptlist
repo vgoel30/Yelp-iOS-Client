@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Yelp/Business.swift"
-            timestampString = "477276884.802928"
+            timestampString = "477288448.000672"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "90"
-            endingLineNumber = "90"
+            startingLineNumber = "97"
+            endingLineNumber = "97"
             landmarkName = "searchWithTerm(_:offset:completion:)"
             landmarkType = "5">
          </BreakpointContent>
