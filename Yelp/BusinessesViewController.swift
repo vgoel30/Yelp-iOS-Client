@@ -17,6 +17,40 @@ extension BusinessesViewController: UISearchResultsUpdating {
 
 class BusinessesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate,   UIScrollViewDelegate{
     
+    func loadMoreData() {
+        
+        Business.searchWithTerm("Thai", offset: businesses!.count/20, completion: { (businesses: [Business]!, error: NSError!) -> Void in
+            self.businesses! += businesses
+            self.tableView.reloadData()
+            for business in businesses {
+                //append the name to the list of restaurant names
+                self.restaurantNames.append(business.name!)
+                //print(business)
+            }
+           // print(self.restaurantNames)
+        })
+        
+        
+    }
+    
+    var isMoreDataLoading = false
+    
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        if (!isMoreDataLoading) {
+            // Calculate the position of one screen length before the bottom of the results
+            let scrollViewContentHeight = tableView.contentSize.height
+            let scrollOffsetThreshold = scrollViewContentHeight - tableView.bounds.size.height
+            
+            // When the user has scrolled past the threshold, start requesting
+            if(scrollView.contentOffset.y > scrollOffsetThreshold && tableView.dragging) {
+                isMoreDataLoading = true
+                
+                // ... Code to load more results ...
+                loadMoreData()
+            }
+        }
+    }
+    
     //function to filter name
     func filterContentForSearchText(searchText: String, scope: String = "All") {
        filteredNames = restaurantNames.filter({ (text) -> Bool in
@@ -69,7 +103,8 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
         tableView.estimatedRowHeight = 120
         
         
-        Business.searchWithTerm("Indian", completion: { (businesses: [Business]!, error: NSError!) -> Void in
+        
+        Business.searchWithTerm("Thai", offset: 0, completion: { (businesses: [Business]!, error: NSError!) -> Void in
             self.businesses = businesses
             self.tableView.reloadData()
             for business in businesses {
