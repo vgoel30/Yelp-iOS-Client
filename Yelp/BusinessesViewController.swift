@@ -15,7 +15,7 @@ extension BusinessesViewController: UISearchResultsUpdating {
 }
 
 
-class BusinessesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, FiltersViewControllerDelegate,  UIScrollViewDelegate{
+class BusinessesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate,   UIScrollViewDelegate{
     
     //function to filter name
     func filterContentForSearchText(searchText: String, scope: String = "All") {
@@ -149,28 +149,7 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
         // Dispose of any resources that can be recreated.
     }
     
+
     
     
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let navigationController = segue.destinationViewController as! UINavigationController
-        
-        let filtersViewController = navigationController.topViewController as! FiltersViewController
-        
-        filtersViewController.delegate = self
-    }
-    
-    //implementing the delegate method
-    func filtersViewController(filterViewController: FiltersViewController, didUpdateFilters filters: [String : AnyObject]) {
-        let categories = filters["categories"] as? [String]
-        Business.searchWithTerm("Restaurants", sort: nil, categories: categories, deals: nil) {(businesses: [Business]!,error:NSError!) -> Void in
-            self.businesses = businesses
-            self.tableView.reloadData()
-        }
-        
-        
-        
-        
-        
-    }
 }
